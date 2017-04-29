@@ -2,6 +2,7 @@
 title = "EduNav"
 languageCode = "en-us"
 theme = "hugo-elate-theme"
+baseURL = "https://edunav.me/"
 
 [params]
   
