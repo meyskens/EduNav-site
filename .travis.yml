@@ -1,0 +1,21 @@
+language: go
+go:
+  - 1.8
+addons:
+  ssh_known_hosts: eyskens.me
+  apt:
+    packages:
+        - sshpass
+        - wget 
+sudo: required
+
+install:
+  - export SSHPASS=$DEPLOY_PASS
+  - wget https://github.com/spf13/hugo/releases/download/v0.19/hugo_0.19-64bit.deb
+  - sudo dpkg -i hugo_0.19-64bit.deb
+
+script:
+  - cd edunav.me && hugo && cd ..
+
+after_success:
+- cd edunav.me && sshpass -e rsync -avz --delete public/ edunav@eyskens.me:/var/www/edunav/

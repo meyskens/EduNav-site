@@ -1,0 +1,31 @@
+<section id="fh5co-intro">
+	<div class="container">
+		<div class="row row-bottom-padded-lg">
+			{{ range .Site.Params.intro.item }}
+			<div class="fh5co-block to-animate" style="background-image: url(images/{{ .img }});">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<i class="fh5co-intro-icon {{ .icon }}"></i>
+					<h2>{{ .title }}</h2>
+					<p>{{ .description }}</p>
+				</div>
+			</div>
+			{{ end }}
+		</div>
+		{{ if .Site.Params.intro.video.enable }}
+		<div class="row watch-video text-center to-animate">
+			<!-- <span>{{ with .Site.Params.intro.video }}{{ . }}{{ end }}</span> -->
+			<span>{{.Site.Params.intro.video.title | markdownify }}</span>
+
+			<a href="{{ .Site.Params.intro.video.url }}" class="popup-vimeo btn-video"><i class="{{ .Site.Params.intro.video.icon | markdownify }}"></i></a>
+		</div>
+		{{ end }}
+	</div>
+	<div style="width: 100%; text-align: center;">
+		<div style="display: inline-block;margin: auto;">
+			<button class=" btn btn-success btn-lg to-animate "><img src="images/play.png "></img> Get on Google Play</button>&nbsp;
+			<button class="btn btn-warning btn-lg to-animate "><img src="images/download.png "></img> Download APK</button>
+		</div>
+	</div>
+</section>

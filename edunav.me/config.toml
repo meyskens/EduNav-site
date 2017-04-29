@@ -1,0 +1,82 @@
+# Page settings
+title = "EduNav"
+languageCode = "en-us"
+theme = "hugo-elate-theme"
+
+[params]
+  
+  custom_css = ["css/custom1.css", "css/custom2.css"]
+
+  # Meta
+  author = "Maartje Eyskens"
+  description = "EduNav is indoor navigation based on the eduroam neywork"
+  email = ""
+  # Navigation
+  [params.navigation]
+    brand = "![EduNav](/images/logo.png)"
+    home = "Home"
+    work = "Screenshots"
+    about = "Our team"
+    contact = "Contact"
+
+  # Hero section
+  [params.hero]
+    title = "Go where you've never been before."
+    subtitle = 'EduNav will guide you'
+
+  [params.intro]
+
+  [[params.intro.item]]
+    title = "Navigate"
+    description = "Based on wifi basestations EduNav knows where you are inside!"
+    icon = "icon-compass"
+
+  [[params.intro.item]]
+    title = "Star"
+    description = "EduNav can save the rooms you often visit so you can get there fast"
+    icon = "icon-star"
+
+  [[params.intro.item]]
+    title = "Search"
+    description = "Not sure where to be? EduNav can search all rooms"
+    icon = "icon-search"
+
+  # Work section
+  [params.work]
+    enable = true
+    title = "Screenshots"
+
+
+    [[params.work.row]]
+      img = "Screenshot_20170429-165846.png"
+      alt = "Map of P300"
+      title = "View Maps"
+
+    [[params.work.row]]
+      img = "Screenshot_20170429-165240.png"
+      alt = "Search view"
+      title = "Search rooms"
+
+    [[params.work.row]]
+      img = "Screenshot_20170429-165251.png"
+      alt = "Favorites view"
+      title = "Save the rooms you need"
+
+  # About section
+  [params.about]
+    enable = true
+    title = "Our Team"
+
+    [[params.about.item]]
+      name = "Maartje Eyskens"
+      position = "Full Stack Developer"
+      img = "maartje.jpg"
+      alt = "Maartje Eyskens"
+      social = [
+        ["icon-github", "meyskens"]
+      ] 
+
+
+  # Footer section
+  [params.footer]
+    enable = false
