@@ -1,6 +1,6 @@
 language: go
 go:
-  - 1.8
+  - 1.x
 addons:
   ssh_known_hosts: eyskens.me
   apt:
@@ -8,6 +8,24 @@ addons:
         - sshpass
         - wget 
 sudo: required
+services: docker
+env:
+    global:
+      - QEMU_VER=v2.9.1
+      - DOCKER_REPO=maartje/edunav-site
+    matrix:
+      - ARCH=amd64 QQEMU_ARCH=x86_64
+      - ARCH=armhf QEMU_ARCH=arm
+      - ARCH=arm64 QEMU_ARCH=aarch64
+
+before_install:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+  - sudo apt-get -y install qemu-user-static
+  - docker run --rm --privileged multiarch/qemu-user-static:register
+
 
 install:
   - export SSHPASS=$DEPLOY_PASS
@@ -16,6 +34,8 @@ install:
 
 script:
   - cd edunav.me && hugo && cd ..
+  - docker build -t $DOCKER_REPO:$ARCH-latest --build-arg ARCH="$ARCH" ./
 
 after_success:
-- cd edunav.me && sshpass -e rsync -avz --delete public/ edunav@eyskens.me:/var/www/edunav/
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then docker push $DOCKER_REPO:$ARCH-latest; fi
